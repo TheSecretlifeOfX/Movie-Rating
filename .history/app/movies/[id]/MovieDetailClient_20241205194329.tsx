@@ -1,10 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
 import Image from 'next/image';
 
-// Define the interface and component
 interface MovieDetail {
   title: string;
   year: string;
@@ -15,30 +13,27 @@ interface MovieDetail {
   actors: string;
 }
 
-const MovieDetailPage = () => {
+interface MovieDetailClientProps {
+  movieId: string;
+}
+
+const MovieDetailClient = ({ movieId }: MovieDetailClientProps) => {
   const [movie, setMovie] = useState<MovieDetail | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
-  const { id: movieId } = useParams();
 
   const OMDB_API_KEY = "dfce1fa4";
 
   useEffect(() => {
-    if (!movieId) {
-      console.log("Movie ID is not available.");
-      return;
-    }
-
     const fetchMovieDetails = async () => {
-      setLoading(true);
-      const url = `https://www.omdbapi.com/?i=${movieId}&apikey=${OMDB_API_KEY}`;
+      if (!movieId) return;
 
       try {
+        const url = `https://www.omdbapi.com/?i=${movieId}&apikey=${OMDB_API_KEY}`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log("Movie Data:", data);
 
         if (data.Response === "True") {
           setMovie({
@@ -56,6 +51,7 @@ const MovieDetailPage = () => {
         }
       } catch (error) {
         console.error("Error fetching movie details:", error);
+        setMovie(null);
       } finally {
         setLoading(false);
       }
@@ -64,7 +60,8 @@ const MovieDetailPage = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (rating !== null && comment.trim() !== "") {
       console.log("Rating:", rating);
       console.log("Comment:", comment);
@@ -75,11 +72,15 @@ const MovieDetailPage = () => {
   };
 
   if (loading) {
-    return <p className="text-center text-gray-500">Loading movie details...</p>;
+    return null;
   }
 
   if (!movie) {
-    return <p className="text-center text-red-500">Movie not found.</p>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <p className="text-xl text-red-500">Movie not found.</p>
+      </div>
+    );
   }
 
   return (
@@ -110,6 +111,7 @@ const MovieDetailPage = () => {
         </p>
       </div>
 
+      {/* Rating and Comment Section */}
       <div className="mt-10 bg-gray-300 rounded-lg">
         <h2 className="text-2xl font-bold mb-4 pb-4 pt-4 text-center bg-gray-400 rounded-lg text-gray-700">Rate and Comment</h2>
         {submitted ? (
@@ -123,7 +125,7 @@ const MovieDetailPage = () => {
             </p>
           </div>
         ) : (
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="rating"
@@ -166,8 +168,7 @@ const MovieDetailPage = () => {
             </div>
             <div className="mb-3 pb-3 text-center">
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 className="bg-gray-500 text-gray-700 px-6 py-2 rounded hover:bg-gray-400"
               >
                 Submit
@@ -180,4 +181,4 @@ const MovieDetailPage = () => {
   );
 };
 
-export default MovieDetailPage;
+export default MovieDetailClient;
