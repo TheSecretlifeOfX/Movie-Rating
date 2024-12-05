@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Background Animation */
+@keyframes move-background {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-10%) translateY(-10%);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.animate-move-background {
+  background-size: 200% 200%;
+  animation: move-background 15s infinite alternate linear;
+}
+
+/* Slideshow Animation */
+/* Add this to your global CSS or in the component's style */
+@keyframes slideEffect {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide {
+  animation: slideEffect 10s infinite ease-in-out;
+}
