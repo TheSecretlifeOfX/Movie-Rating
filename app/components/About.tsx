@@ -31,7 +31,7 @@ export default function About() {
               <div className="flex justify-center">
                 <div className="relative w-full aspect-[3/4] max-w-[300px]">
                   <Image
-                    src="/images/DSC_1037.JPG"
+                    src="/Images/DSC_1037.JPG"
                     alt="About Me"
                     fill
                     className="object-cover shadow-lg rounded-lg"
@@ -47,7 +47,7 @@ export default function About() {
             <div className="flex flex-col h-full justify-between space-y-6">
               <div className="relative w-full aspect-square max-w-[300px] mx-auto">
                 <Image
-                  src="/images/ideas.jpg"
+                  src="/Images/ideas.jpg"
                   alt="Idea"
                   fill
                   className="rounded-lg object-cover shadow-md"
