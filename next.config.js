@@ -1,7 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [], // Add any external domains you need here
+    domains: [
+      'm.media-amazon.com',
+      'ia.media-imdb.com',
+      'image.tmdb.org'
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.media-amazon.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.imdb.com',
+      }
+    ]
   },
 }
 
