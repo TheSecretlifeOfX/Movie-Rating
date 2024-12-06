@@ -26,20 +26,37 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-300%);
+    transform: translateX(-50%);
   }
 }
 
+.slideshow-container {
+  width: 100%;
+  overflow: hidden;
+}
+
 .animate-slide {
+  display: flex;
   animation: slide 30s linear infinite;
+  width: 200%; /* Double width to accommodate two sets of images */
 }
 
 .animate-slide:hover {
   animation-play-state: paused;
 }
 
+.slide-item {
+  flex: 0 0 16.666%; /* 100% / 6 items = 16.666% */
+  min-width: 16.666%;
+}
+
 @media (max-width: 768px) {
   .animate-slide {
     animation-duration: 20s;
+  }
+  
+  .slide-item {
+    flex: 0 0 33.333%; /* 100% / 3 items = 33.333% for mobile */
+    min-width: 33.333%;
   }
 }

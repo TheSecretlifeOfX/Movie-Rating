@@ -1,6 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 
+const movieSlides = [
+  { src: '/TopImages/avengers.jpeg', alt: 'Movie 1' },
+  { src: '/TopImages/transformer1.jpeg', alt: 'Movie 2' },
+  { src: '/TopImages/wildRobot.jpeg', alt: 'Movie 3' },
+];
+
 export default function TopPage() {
   return (
     <div id="Top" className="relative w-full min-h-screen overflow-hidden bg-black">
@@ -17,80 +23,38 @@ export default function TopPage() {
         </p>
 
         {/* Movie Slideshow */}
-        <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg">
-          <div className="flex animate-slide">
+        <div className="slideshow-container relative w-full max-w-6xl mx-auto rounded-lg shadow-lg">
+          <div className="animate-slide">
             {/* First Set */}
-            <div className="w-full md:w-[33%] h-[50vh] md:h-[40vh] flex-shrink-0 px-2">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/TopImages/avengers.jpeg"
-                  alt="Movie 1"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  priority
-                />
+            {movieSlides.map((slide, index) => (
+              <div key={`slide-1-${index}`} className="slide-item px-2">
+                <div className="relative w-full h-[50vh] md:h-[40vh]">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    className="rounded-lg object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority={index < 3}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="w-full md:w-[33%] h-[50vh] md:h-[40vh] flex-shrink-0 px-2">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/TopImages/transformer1.jpeg"
-                  alt="Movie 2"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  priority
-                />
-              </div>
-            </div>
-            <div className="w-full md:w-[33%] h-[50vh] md:h-[40vh] flex-shrink-0 px-2">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/TopImages/wildRobot.jpeg"
-                  alt="Movie 3"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  priority
-                />
-              </div>
-            </div>
+            ))}
 
             {/* Duplicate Set for Infinite Loop */}
-            <div className="w-full md:w-[33%] h-[50vh] md:h-[40vh] flex-shrink-0 px-2">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/TopImages/avengers.jpeg"
-                  alt="Movie 1"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
+            {movieSlides.map((slide, index) => (
+              <div key={`slide-2-${index}`} className="slide-item px-2">
+                <div className="relative w-full h-[50vh] md:h-[40vh]">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    className="rounded-lg object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="w-full md:w-[33%] h-[50vh] md:h-[40vh] flex-shrink-0 px-2">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/TopImages/transformer1.jpeg"
-                  alt="Movie 2"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-            </div>
-            <div className="w-full md:w-[33%] h-[50vh] md:h-[40vh] flex-shrink-0 px-2">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/TopImages/wildRobot.jpeg"
-                  alt="Movie 3"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
