@@ -21,19 +21,25 @@
 }
 
 /* Slideshow Animation */
-/* Add this to your global CSS or in the component's style */
-@keyframes slideEffect {
+@keyframes slide {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%); /* Move all images out of view */
+    transform: translateX(-300%);
   }
 }
 
 .animate-slide {
-  display: flex;
-  width: 100%;
-  animation: slideEffect 15s linear infinite; /* Animation running infinitely */
+  animation: slide 30s linear infinite;
 }
 
+.animate-slide:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .animate-slide {
+    animation-duration: 20s;
+  }
+}

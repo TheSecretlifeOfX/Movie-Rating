@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 
@@ -96,32 +94,6 @@ export default function TopPage() {
           </div>
         </div>
       </div>
-
-      {/* Custom Animation Styles */}
-      <style jsx global>{`
-        @keyframes slide {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-300%);
-          }
-        }
-
-        .animate-slide {
-          animation: slide 30s linear infinite;
-        }
-
-        .animate-slide:hover {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 768px) {
-          .animate-slide {
-            animation-duration: 20s;
-          }
-        }
-      `}</style>
     </div>
   );
 }
